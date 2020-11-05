@@ -1,0 +1,74 @@
+﻿@page
+@model WebAddressVerification.Pages.DemoModel
+@{
+    string CardBorder = "";
+    string _bgrStyle = "";
+    if (!ModelState.IsValid)
+    {
+        _bgrStyle = "bg-danger text-white";
+        CardBorder = " border-danger";
+    }
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <form method="post">
+                <div class="card @CardBorder">
+
+                    <div class="card-header @_bgrStyle">
+                        AdAdress
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label asp-for="Input.Country"></label>
+                                <select asp-for="Input.Country" type="text" class="form-control" asp-items="@Model.CountrySelectItems"></select>
+                                <span asp-validation-for="Input.Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label asp-for="Input.State"></label>
+                                <input asp-for="Input.State" type="text" class="form-control">
+                                <span asp-validation-for="Input.State" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-8">
+                                <label asp-for="Input.City"></label>
+                                <input asp-for="Input.City" type="text" class="form-control">
+                                <span asp-validation-for="Input.City" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label asp-for="Input.Zip"></label>
+                                <input asp-for="Input.Zip" type="number" class="form-control">
+                                <span asp-validation-for="Input.Zip" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-8">
+                                <label asp-for="Input.Street"></label>
+                                <input asp-for="Input.Street" type="text" class="form-control">
+                                <span asp-validation-for="Input.Street" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label asp-for="Input.Number"></label>
+                                <input asp-for="Input.Number" class="form-control">
+                                <span asp-validation-for="Input.Number" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer @_bgrStyle">
+
+                        <button type="submit">Submit</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p>@Model.Input.Country</p>
+</div>
