@@ -16,6 +16,7 @@ namespace WebAddressVerification
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Model.DAL._sqlConnString = Configuration["ConnString"];
         }
 
         public IConfiguration Configuration { get; }
