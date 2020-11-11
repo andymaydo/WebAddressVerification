@@ -1,14 +1,30 @@
 ﻿@page
 @model WebAddressVerification.Pages.DemoModel
+
 @{
+
     string CardBorder = "";
     string _bgrStyle = "";
-    if (!ModelState.IsValid)
+    if (!ModelState.IsValid || !string.IsNullOrEmpty(Model.ErrorMessage))
+
     {
         _bgrStyle = "bg-danger text-white";
         CardBorder = " border-danger";
     }
+    else
+    {
+        if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            CardBorder = "border-success";
+            _bgrStyle = "bg-success text-white";
+        }
+    }
+
+
 }
+
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-10">
@@ -61,7 +77,7 @@
 
 
                     </div>
-                    <div class="card-footer @_bgrStyle">
+                    <div class="card-footer @_bgrStyle ">
 
                         <button type="submit">Submit</button>
 
@@ -70,5 +86,7 @@
             </form>
         </div>
     </div>
-    <p>@Model.Input.Country</p>
+    <p>@Model.ResponseResult</p>
+    <p>@Model.ReqId</p>
+
 </div>
