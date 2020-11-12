@@ -54,16 +54,16 @@ namespace WebAddressVerification.Pages
        
         public int ReqId { get; set; }
 
-        public int ResponseResult { get; set; }
+        public int ResponseResult { get; set; } = -1;
         public List<ResponseDetail> ResponseDetails { get; set; }
 
 
         public DemoModel()
         {
             Input = new AddAdress();
-
-            CountrySelectItems = new List<SelectListItem>();
            
+            CountrySelectItems = new List<SelectListItem>();
+            ResponseDetails = new List<ResponseDetail>();
             try
             {
                 var CountryCodes = DAL.CountryCodeGetAll();
@@ -108,7 +108,7 @@ namespace WebAddressVerification.Pages
 
                 (ResponseResult, ResponseDetails) = DAL.RequestValidate(RequestInput);
 
-                SuccessMessage = "Everything is ok";
+                SuccessMessage = "Your address is availabel";
           
             }
             catch(Exception e ) 

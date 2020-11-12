@@ -5,7 +5,7 @@
 
     string CardBorder = "";
     string _bgrStyle = "";
-    if (!ModelState.IsValid || !string.IsNullOrEmpty(Model.ErrorMessage))
+    if (!ModelState.IsValid || !string.IsNullOrEmpty(Model.ErrorMessage)|| Model.ResponseResult == 0)
 
     {
         _bgrStyle = "bg-danger text-white";
@@ -86,7 +86,85 @@
             </form>
         </div>
     </div>
-    <p>@Model.ResponseResult</p>
-    <p>@Model.ReqId</p>
+    <!--<p>@Model.ResponseResult</p>
+        <p>@Model.ReqId</p>
+    -->
+    @if (Model.ResponseResult == 0)
+    {
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-header">
+                        <p class="text-danger">This address don't exist!Here is some address close to your choise</p>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-md">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>RequestId</th>
+                                    <th>CountryCodeISO2 </th>
+                                    <th>State</th>
+                                    <th>City </th>
+                                    <th>Zip</th>
+                                    <th>Street</th>
+                                    <th>Number</th>
+                                    <th>Rate</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var a in Model.ResponseDetails)
+                                {
+
+
+                                    <tr>
+                                        <td>@a.RequestId</td>
+                                        <td>@a.CountryCodeISO2</td>
+                                        <td>@a.State</td>
+                                        <td>@a.City</td>
+                                        <td>@a.Zip</td>
+                                        <td>@a.Street</td>
+                                        <td>@a.StreetNumber</td>
+                                        <td>@a.Rate</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+    @if (Model.ResponseResult == 1)
+    {
+        <div class="row justify-content-center mt-5">
+            <div class="col-6">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">@Model.SuccessMessage</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="col">Country: @Model.Input.Country</td>
+                                <td> State:@Model.Input.State</td>
+                            </tr>
+                            <tr>
+                                <td class="col">City:@Model.Input.City</td>
+                                <td class="col">Zip:@Model.Input.Zip</td>
+                            </tr>
+                            <tr>
+                                <td class="col">Street:@Model.Input.Street</td>
+                                <td class="col">Number:@Model.Input.Number</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+
 
 </div>

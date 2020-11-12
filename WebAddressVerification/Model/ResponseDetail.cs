@@ -25,7 +25,7 @@ namespace WebAddressVerification.Model
         public string Street { get; set; }
 
 
-        public string Number { get; set; }
+        public string StreetNumber { get; set; }
 
         public int Rate { get; set; }
 
