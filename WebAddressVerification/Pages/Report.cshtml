@@ -1,0 +1,172 @@
+﻿@page "{handler?}"
+@model WebAddressVerification.Pages.ReportModel
+@{
+    var url = "";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <form method="post" asp-page-handler="List">
+                <div class="card ">
+
+                    <div class="card-header ">
+                        Report
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select asp-for="Input.Status" type="text" asp-items="@Model.StatusSelectItems" class="form-control">
+                                    @*<option value ="-1">all statuses</option>
+                                        <option value="1">Valid</option>
+                                        <option value="0">Invalid</option>*@
+
+                                </select>
+                                <span asp-validation-for="Input.Status" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Street</label>
+                                <input asp-for="Input.Street" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label>From Date</label>
+                                <input asp-for="Input.FromDate" class="form-control" type="date" id="example-date-input">
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label> To Date</label>
+                                <input asp-for="Input.ToDate" class="form-control" type="date" id="example-date-input">
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer ">
+                        <button type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.ReportStarted)
+    {
+        <div class="row justify-content-center lg-3">
+            <div class="col-lg-10">
+                <div class="card lg">
+                    <div class="card-header ">
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.RequestReport.Count() > 0)
+                        {
+                            <table class="table table-responsive lg">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>RequestId</th>
+                                        <th>RequestDate</th>
+                                        <th>Country</th>
+                                        <th>State</th>
+                                        <th>City </th>
+                                        <th>Zip</th>
+                                        <th>Street</th>
+                                        <th>Number</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var a in Model.RequestReport)
+                                    {
+
+                                        url = "/ResponseDetail?rid=" + @a.RequestId;
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-primary modal-response-detail-link" data-toggle="modal" data-target="#modal-response" data-rid="@a.RequestId">
+                                                    @a.RequestId
+                                                </button>
+                                            </td>
+                                            @*<td><a href=" /ResponseDetail?rid=@a.RequestId">@a.RequestId</a></td>*@
+                                            @*<td><a onclick="window.open('/ResponseDetail?rid=@a.RequestId','popUpWindow','height=400,width=600,left=10,top=10,,scrollbars=yes,menubar=no');">@a.RequestId</a></td>*@
+                                            <td>@a.RequestDate</td>
+                                            <td>@a.CountryCodeISO2</td>
+                                            <td>@a.State</td>
+                                            <td>@a.City</td>
+                                            <td>@a.Zip</td>
+                                            <td>@a.Street</td>
+                                            <td>@a.StreetNumber</td>
+                                            <td>@a.Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+
+                            <div class="alert alert-danger col mb-0 " role="alert">
+                                <h4 class="alert-heading">Not Request found!</h4>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    }
+    @*else if(Model.ErrorMessage!=null) 
+    {
+        <div class="alert alert-danger col-lg-10 mb-0 " role="alert">
+                @Model.ErrorMessage
+            </div>
+    }*@
+
+
+
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-response">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-response-detail">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+
+        $(function () {
+
+            $('.modal-response-detail-link').on('click', function () {
+
+                $('.modal-response-detail').load(`/ResponseDetail/Partial?rid=${$(this).data('rid')}`);
+
+            });
+
+        })
+
+    </script>
+
+}

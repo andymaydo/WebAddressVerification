@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using WebAddressVerification.Model;
+
+using Domain;
+using Aplication;
+
 namespace WebAddressVerification.Pages
  
 {
@@ -25,7 +28,6 @@ namespace WebAddressVerification.Pages
             public string Country { get; set; }
 
             [Display(Name = "Staat")]
-            [Required(ErrorMessage = "This  field is required")]
             public string State { get; set; }
 
             [Display(Name = "City")]
@@ -42,7 +44,7 @@ namespace WebAddressVerification.Pages
 
             [Display(Name = "Number")]
             [Required(ErrorMessage = "This  field is required")]
-            [RegularExpression("([1-9][0-9]*)", ErrorMessage = "must be a number")]
+          
             public string Number { get; set; }
 
         }
@@ -52,21 +54,23 @@ namespace WebAddressVerification.Pages
 
         public string ErrorMessage { get; set; }
        
-        public int ReqId { get; set; }
+       
 
         public int ResponseResult { get; set; } = -1;
         public List<ResponseDetail> ResponseDetails { get; set; }
+        private IWebAddressVerification _webAddressVerification;
 
 
-        public DemoModel()
+        public DemoModel(IWebAddressVerification addressVerification)
         {
+            _webAddressVerification = addressVerification;
             Input = new AddAdress();
            
             CountrySelectItems = new List<SelectListItem>();
             ResponseDetails = new List<ResponseDetail>();
             try
             {
-                var CountryCodes = DAL.CountryCodeGetAll();
+                var CountryCodes = _webAddressVerification.CountryCodeGetAll();
 
                 foreach (var a in CountryCodes)
                 {
@@ -103,10 +107,10 @@ namespace WebAddressVerification.Pages
                 RequestInput.City = Input.City;
                 RequestInput.Street = Input.Street;
                 RequestInput.Zip = Input.Zip;
-                RequestInput.Number = Input.Number;
+                RequestInput.StreetNumber = Input.Number;
                 RequestInput.CallerId = 0;
 
-                (ResponseResult, ResponseDetails) = DAL.RequestValidate(RequestInput);
+                (ResponseResult, ResponseDetails) = _webAddressVerification.RequestValidate(RequestInput);
 
                 SuccessMessage = "Your address is availabel";
           

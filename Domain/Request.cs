@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAddressVerification.Model
+namespace Domain
 {
     public class Request
     {
@@ -26,6 +26,6 @@ namespace WebAddressVerification.Model
         public string Street { get; set; }
 
        
-        public string Number { get; set; }
+        public string StreetNumber { get; set; }
     }
 }

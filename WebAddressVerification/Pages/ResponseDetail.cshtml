@@ -1,0 +1,136 @@
+﻿@page "{handler}"
+@model WebAddressVerification.Pages.ResponseDetailModel
+@{
+}
+@*@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">@Model.Input.ErrorMesege</h4>
+    </div>
+}
+else
+{
+<div class="container">
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+
+            @if (Model.Input.CurrentRequest != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading  text-center">The Searching request with RequestId  @Model.Input.CurrentRequest.RequestId </h4>
+                    <div class="row">
+                        <div class="col-md-2">Country</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.CountryCodeISO2</div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">State</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.State</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-2">City</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.City</div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">Zip</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.Zip</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">Street</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.Street</div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">Number</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.Number</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">CallerId</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.CallerId</div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">RequestDate</div>
+                        <div class="col-md-3">@Model.Input.CurrentRequest.RequestDate</div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            @if (Model.Input.CurrentResponseDetail?.Count > 0)
+                            {
+                                <div class="card-header">
+                                    <p class="text-danger">This address don't exist!Here is some address close to your choise</p>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-responsive-md">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>RequestId</th>
+                                                <th>CountryCodeISO2 </th>
+                                                <th>State</th>
+                                                <th>City </th>
+                                                <th>Zip</th>
+                                                <th>Street</th>
+                                                <th>Number</th>
+                                                <th>Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var a in Model.Input.CurrentResponseDetail)
+                                            {
+                                                <tr>
+                                                    <td>@a.RequestId</td>
+                                                    <td>@a.CountryCodeISO2</td>
+                                                    <td>@a.State</td>
+                                                    <td>@a.City</td>
+                                                    <td>@a.Zip</td>
+                                                    <td>@a.Street</td>
+                                                    <td>@a.StreetNumber</td>
+                                                    <td>@a.Rate</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-success col mb-0 " role="alert">
+                                    <h4 class="alert-heading">Not Response details found!</h4>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Request not found!</h4>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Input.ErrorMesege))
+            {
+                <div class="alert alert-danger mt-4" role="alert">
+                    <h4 class="alert-heading">@Model.Input.ErrorMesege</h4>
+                </div>
+            }
+             <div class="text-right mt-4" >
+                 <a href="@Model.ReturnUrl" class="btn btn-primary btn-lg active">Back</a>
+             </div>
+        </div>
+
+    </div>
+
+   
+  
+</div>
+}*@
+
+    
+
+
+

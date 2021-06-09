@@ -86,9 +86,8 @@
             </form>
         </div>
     </div>
-    <!--<p>@Model.ResponseResult</p>
-        <p>@Model.ReqId</p>
-    -->
+   
+    
     @if (Model.ResponseResult == 0)
     {
 
@@ -144,26 +143,31 @@
             <div class="col-6">
                 <div class="alert alert-success" role="alert">
                     <h4 class="alert-heading">@Model.SuccessMessage</h4>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td class="col">Country: @Model.Input.Country</td>
-                                <td> State:@Model.Input.State</td>
-                            </tr>
-                            <tr>
-                                <td class="col">City:@Model.Input.City</td>
-                                <td class="col">Zip:@Model.Input.Zip</td>
-                            </tr>
-                            <tr>
-                                <td class="col">Street:@Model.Input.Street</td>
-                                <td class="col">Number:@Model.Input.Number</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="col">Country</div>
+                        <div class="col">@Model.Input.Country</div>
+                        <div class="col"></div>
+                        <div class="col">State</div>
+                        <div class="col">@Model.Input.State</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col">City</div>
+                        <div class="col">@Model.Input.City</div>
+                        <div class="col"></div>
+                        <div class="col">Zip</div>
+                        <div class="col">@Model.Input.Zip</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Street</div>
+                        <div class="col">@Model.Input.Street</div>
+                        <div class="col"></div>
+                        <div class="col">Number</div>
+                        <div class="col">@Model.Input.Number</div>
+                    </div>              
                 </div>
             </div>
         </div>
-    }
+      }
 
 
 
