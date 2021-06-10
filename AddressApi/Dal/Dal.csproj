@@ -13,16 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\Andy\.nuget\packages\mongodb.driver.core\2.12.4\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Andy\.nuget\packages\mongodb.driver.core\2.12.4\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Aplication\Aplication.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="C:\Users\Andy\.nuget\packages\mongodb.driver.core\2.12.4\build\../runtimes/win/native/libzstd.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="C:\Users\Andy\.nuget\packages\mongodb.driver.core\2.12.4\build\../runtimes/win/native/libzstd.dll" />
   </ItemGroup>
 
 </Project>
