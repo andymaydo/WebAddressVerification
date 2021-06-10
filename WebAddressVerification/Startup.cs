@@ -27,6 +27,10 @@ namespace WebAddressVerification
             services.AddRazorPages();
             //services.AddDalService();
             services.AddWebApiServices();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute("/Demo", "");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
